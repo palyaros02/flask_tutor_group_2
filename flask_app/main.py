@@ -70,6 +70,24 @@ def total(a, b):
     return f'a + b = {a + b}'
 
 
+def get_primes(n):
+    primes = []
+    current = 2
+    while len(primes) < n:
+        for i in range(2, current):
+            if current % i == 0:
+                break
+
+        else:
+            primes.append(current)
+
+        current += 1
+    return " ".join(map(str, primes))
+
+
+app.add_url_rule("/primes/<int:n>", "primes", get_primes)
+
+
 if __name__ == '__main__':
     n = 100
     app.run(debug=True)
