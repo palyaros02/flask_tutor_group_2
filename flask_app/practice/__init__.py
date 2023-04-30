@@ -1,0 +1,1 @@
+from .lesson2 import app
