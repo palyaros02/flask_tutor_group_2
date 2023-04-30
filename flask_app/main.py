@@ -1,7 +1,7 @@
-from flask import Flask
-
 import random
+
 import requests
+from flask import Flask, url_for
 
 app = Flask(__name__)
 
@@ -16,15 +16,9 @@ def news():
     return "Новости"
 
 
-@app.route('/news_detail/1')
-def news1():
-    return "Новость 1"
-
-
-@app.route('/news_detail/2')
-def news2():
-    return "Новость 2"
-
+@app.route('/news_detail/<int:id>')
+def news_detail(id: int):
+    return f"Новость {id}"
 
 def get_finonacci(n):
     numbers = [1, 1]
@@ -68,6 +62,12 @@ def citate():
 @app.route('/total/<int:a>/<int:b>')
 def total(a, b):
     return f'a + b = {a + b}'
+
+
+with app.test_request_context():
+    print(url_for('index'))
+    print(url_for('news'))
+    print(url_for('news_detail', id=10))
 
 
 if __name__ == '__main__':
