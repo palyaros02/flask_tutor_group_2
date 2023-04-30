@@ -19,7 +19,7 @@ index_temlate = """\
 """
 
 @app.route('/')
-def index() -> str:
+def index():
     return index_temlate
 
 @app.route('/news')
@@ -36,7 +36,6 @@ def run_tests():
         print(url_for('index'))
         print(url_for('news'))
         print(url_for('news_detail', id=10))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
