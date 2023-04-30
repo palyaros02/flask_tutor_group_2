@@ -1,12 +1,16 @@
 from flask import Flask, url_for
 
-import random, requests
+import random
+
+import requests
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     return "Главная страница"
+
 
 @app.route('/news')
 def news():
@@ -16,6 +20,7 @@ def news():
 @app.route('/news_detail/<int:id>')
 def news_detail(id: int):
     return f"Новость {id}"
+
 
 def get_finonacci(n):
     numbers = [1, 1]
@@ -78,12 +83,10 @@ def get_primes(n):
 
 app.add_url_rule("/primes/<int:n>", "primes", get_primes)
 
-
 with app.test_request_context():
     print(url_for('index'))
     print(url_for('news'))
     print(url_for('news_detail', id=10))
-
 
 if __name__ == '__main__':
     n = 100
