@@ -1,15 +1,12 @@
-import random
-
-import requests
 from flask import Flask, url_for
 
-app = Flask(__name__)
+import random, requests
 
+app = Flask(__name__)
 
 @app.route('/')
 def index():
     return "Главная страница"
-
 
 @app.route('/news')
 def news():
@@ -62,6 +59,24 @@ def citate():
 @app.route('/total/<int:a>/<int:b>')
 def total(a, b):
     return f'a + b = {a + b}'
+
+
+def get_primes(n):
+    primes = []
+    current = 2
+    while len(primes) < n:
+        for i in range(2, current):
+            if current % i == 0:
+                break
+
+        else:
+            primes.append(current)
+
+        current += 1
+    return " ".join(map(str, primes))
+
+
+app.add_url_rule("/primes/<int:n>", "primes", get_primes)
 
 
 with app.test_request_context():
