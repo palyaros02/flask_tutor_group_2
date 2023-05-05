@@ -1,29 +1,24 @@
-from flask import Flask
-
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-index_temlate = """\
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Главная страница</title>
-    </head>
-    <body>
-        <h1>Главная страница</h1>
-        <hr>
-        <p>Привет, <b>Flask</b>!</p>
-        <p><a href="/news">Новости</a></p>
-        <p><img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"></p>
-    </body>
-</html>
-"""
-
+news_list = [
+        {
+            "title": 'Заголовок новости 1',
+            "text": 'Текст новости 1'
+        },
+    ]
 
 @app.route('/')
-def index() -> str:
-    return index_temlate
+def index():
+    context = dict(
+        title='Главная страница',
+        text='Скоро тут будут <b>новости</b>!'
+    )
+    return render_template(
+        'index.html',
+        context=context
+    )
 
 @app.route('/news')
 def news():
@@ -31,7 +26,11 @@ def news():
 
 @app.route('/news_detail/<int:id>')
 def news_detail(id: int):
-    return f"Новость {id}"
+    context = dict(
+        title=news_list[id]['title'],
+        text=news_list[id]['text'],
+    )
+    return render_template('news_detail.html', **context)
 
 @app.route('/category/<string:name>')
 def category(name: str):
