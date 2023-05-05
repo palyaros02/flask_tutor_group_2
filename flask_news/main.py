@@ -17,7 +17,7 @@ def index():
     )
     return render_template(
         'index.html',
-        context=context
+        **context
     )
 
 @app.route('/news')
