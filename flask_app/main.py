@@ -1,26 +1,13 @@
-from flask import Flask, url_for
+from flask import Flask, render_template, url_for
 from practice import app
 
-index_temlate = """\
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Главная страница</title>
-    </head>
-    <body>
-        <h1>Главная страница</h1>
-        <hr>
-        <p>Привет, <b>Flask</b>!</p>
-        <p><a href="/news">Новости</a></p>
-        <p><img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"></p>
-    </body>
-</html>
-"""
+context = {'title': 'Заголовок',
+           'text': 'Текст'}
 
 @app.route('/')
 def index():
-    return index_temlate
+    return render_template('index.html', context=context)
+
 
 @app.route('/news')
 def news():

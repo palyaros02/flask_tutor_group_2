@@ -2,39 +2,42 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-news_list = [
-        {
-            "title": 'Заголовок новости 1',
-            "text": 'Текст новости 1'
-        },
-    ]
+news = [{'title': 'Удивительное событие в школе',
+         'text': 'Вчера в местной школе произошло удивительное событие - все '
+                 'ученики одновременно зевнули на уроке математики. '
+                 'Преподаватель был так поражен этим коллективным зевком, '
+                 'что решил отменить контрольную работу.'},
+        {'title': 'Случай в зоопарке',
+         'text': 'В зоопарке города произошел необычный случай - ленивец '
+                 'решил не лениться и взобрался на самое высокое дерево в '
+                 'своем вольере. Посетители зоопарка были поражены такой '
+                 'активностью и начали снимать ленивца на видео. В итоге он '
+                 'получил свой собственный канал на YouTube, где он размещает '
+                 'свои приключения.'},
+        {'title': 'Самый красивый пёс',
+         'text': 'Сегодня в парке прошел необычный конкурс - "Самый красивый '
+                 'пёс". Участники конкурса были так красивы, что судьи не '
+                 'могли выбрать победителя. В итоге, конкурс был объявлен '
+                 'ничейным, а участники получили награды за участие, '
+                 'в том числе - пакетики конфет и игрушки в виде косточек. '
+                 'Конкурс вызвал большой интерес у посетителей парка, '
+                 'и его решили повторить в более масштабном формате.'}]
+
 
 @app.route('/')
 def index():
-    context = dict(
-        title='Главная страница',
-        text='Скоро тут будут <b>новости</b>!'
-    )
-    return render_template(
-        'index.html',
-        **context
-    )
+    return render_template('index.html',
+                           news=news)
 
-@app.route('/news')
-def news():
-    return "Новости"
 
 @app.route('/news_detail/<int:id>')
-def news_detail(id: int):
-    context = dict(
-        title=news_list[id]['title'],
-        text=news_list[id]['text'],
-    )
-    return render_template('news_detail.html', **context)
+def news_detail(id):
+    title = news[id]['title']
+    text = news[id]['text']
+    return render_template('news_detail.html',
+                           title=title,
+                           text=text)
 
-@app.route('/category/<string:name>')
-def category(name: str):
-    return f"Категория {name}"
 
 if __name__ == '__main__':
     app.run(debug=True)

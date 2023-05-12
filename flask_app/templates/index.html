@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ context['title'] }}</title>
+</head>
+<body>
+  <h1>context['title']</h1>
+  <hr>
+  {{ context.text.upper() }}
+  <p>Привет, <b>Flask</b>!</p>
+  <p><a href="/news">Новости</a></p>
+  <p><img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"></p>
+  {{ 3 + 4 }}<br>
+  {{ 3 < 4 }}<br>
+  {{ 3 % 2 == 0 }}<br>
+  {{ True or False }}<br>
+</body>
+</html>
