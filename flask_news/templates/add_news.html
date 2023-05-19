@@ -9,7 +9,7 @@
   {{ form.csrf_token }}
   <div class="form-group">
     <label>
-      {{ form.title.label }}
+      {{ form.title.label }} <!-- Заголовок -->
     </label>
     {{ form.title(class="form-control") }}
   </div>
@@ -20,7 +20,7 @@
   {% endfor %}
   <div class="form-group">
     <label>
-      {{ form.text.label }}
+      {{ form.text.label }} <!-- Текст -->
     </label>
     {{ form.text(class="form-control", rows="5") }}
   </div>
@@ -29,6 +29,12 @@
     <span>{{ error }}</span>
   </div>
   {% endfor %}
+  <div class="form-group">
+    <label>
+      {{ form.categories.label }} <!-- Текст -->
+    </label>
+    {{ form.categories(class="form-control") }}
+  </div>
   {{ form.submit(class="btn btn-primary btn-lg") }}
 </form>
 {% endblock %}
